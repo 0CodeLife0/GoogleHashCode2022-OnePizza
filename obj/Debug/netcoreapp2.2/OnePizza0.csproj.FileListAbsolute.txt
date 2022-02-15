@@ -1,0 +1,11 @@
+C:\Users\Lenovo\Desktop\OnePizza0\bin\Debug\netcoreapp2.2\OnePizza0.deps.json
+C:\Users\Lenovo\Desktop\OnePizza0\bin\Debug\netcoreapp2.2\OnePizza0.runtimeconfig.json
+C:\Users\Lenovo\Desktop\OnePizza0\bin\Debug\netcoreapp2.2\OnePizza0.runtimeconfig.dev.json
+C:\Users\Lenovo\Desktop\OnePizza0\bin\Debug\netcoreapp2.2\OnePizza0.dll
+C:\Users\Lenovo\Desktop\OnePizza0\bin\Debug\netcoreapp2.2\OnePizza0.pdb
+C:\Users\Lenovo\Desktop\OnePizza0\obj\Debug\netcoreapp2.2\OnePizza0.csprojAssemblyReference.cache
+C:\Users\Lenovo\Desktop\OnePizza0\obj\Debug\netcoreapp2.2\OnePizza0.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\OnePizza0\obj\Debug\netcoreapp2.2\OnePizza0.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Desktop\OnePizza0\obj\Debug\netcoreapp2.2\OnePizza0.AssemblyInfo.cs
+C:\Users\Lenovo\Desktop\OnePizza0\obj\Debug\netcoreapp2.2\OnePizza0.dll
+C:\Users\Lenovo\Desktop\OnePizza0\obj\Debug\netcoreapp2.2\OnePizza0.pdb
