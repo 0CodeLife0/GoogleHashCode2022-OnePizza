@@ -14,20 +14,24 @@ namespace OnePizza0
         static public List<string> filenamelist = new List<string>();
         static void Main(string[] args)
         {
-            // filenamelist.Add("a_an_example.in.txt");
-            // filenamelist.Add("b_basic.in.txt");
+            // un comment each file to run it
+            filenamelist.Add("a_an_example.in.txt");
+            filenamelist.Add("b_basic.in.txt");
             filenamelist.Add("c_coarse.in.txt");
             // filenamelist.Add("d_difficult.in.txt");
             // filenamelist.Add("e_elaborate.in.txt");
 
             foreach (var myfilename in filenamelist)
             {
+                myingredient_info_list = new List<ingredient_info>();
+                mying_all_list = new List<ing_all>();
+                
                 picky_client picky_clients = new picky_client();
                 Console.WriteLine("- Start Reading - " + myfilename);
                 picky_clients = ReadMyInput(path + myfilename);
 
                 Pizza mypizza = CreatePizza(picky_clients);
-                
+
                 WriteOutput(mypizza, path + myfilename);
 
                 Console.WriteLine("N of selected ing= " + mypizza.n_ingredients + "\n- Finished Running - " + myfilename);
@@ -53,25 +57,32 @@ namespace OnePizza0
 
             for (int i = 1; i <= mypicky_client.n_potential_clients * 2; i += 2)
             {
-                client_preference myclient_Preference = new client_preference();
-
                 var loved_ing_line = MyInputFile[i].Split(' ');
-                myclient_Preference.n_loved_ingredients = int.Parse(loved_ing_line[0]);
-                for (int j = 1; j <= myclient_Preference.n_loved_ingredients; j++)
-                {
-                    myclient_Preference.loved_ingredients.Add(loved_ing_line[j]);
-                    mying_all_list.Add(new ing_all(i, loved_ing_line[j], true));
-                }
-
                 var hated_ing_line = MyInputFile[i + 1].Split(' ');
-                myclient_Preference.n_hated_ingredients = int.Parse(hated_ing_line[0]);
-                for (int j = 1; j <= myclient_Preference.n_hated_ingredients; j++)
+                // when running elaborate, if you filter out clients who hate more then 3 ings you get a better score
+                // Thanks to: https://youtu.be/AQnUJgt6tb0
+                // but that's not the case for the difficut file
+                if (!full_path.Contains("elaborate") ||
+                (full_path.Contains("elaborate")&&int.Parse(hated_ing_line[0]) < 3))
                 {
-                    myclient_Preference.hated_ingredients.Add(hated_ing_line[j]);
-                    mying_all_list.Add(new ing_all(i, hated_ing_line[j], false));
+                    client_preference myclient_Preference = new client_preference();
+
+                    myclient_Preference.n_loved_ingredients = int.Parse(loved_ing_line[0]);
+                    for (int j = 1; j <= myclient_Preference.n_loved_ingredients; j++)
+                    {
+                        myclient_Preference.loved_ingredients.Add(loved_ing_line[j]);
+                        mying_all_list.Add(new ing_all(i, loved_ing_line[j], true));
+                    }
+
+                    myclient_Preference.n_hated_ingredients = int.Parse(hated_ing_line[0]);
+                    for (int j = 1; j <= myclient_Preference.n_hated_ingredients; j++)
+                    {
+                        myclient_Preference.hated_ingredients.Add(hated_ing_line[j]);
+                        mying_all_list.Add(new ing_all(i, hated_ing_line[j], false));
+                    }
+                    mypicky_client.client_preferences.Add(myclient_Preference);
+                    Console.WriteLine(((double)mypicky_client.client_preferences.Count() / (double)mypicky_client.n_potential_clients) * 100 + "% read");
                 }
-                mypicky_client.client_preferences.Add(myclient_Preference);
-                Console.WriteLine(((double)mypicky_client.client_preferences.Count() / (double)mypicky_client.n_potential_clients) * 100 + "% read");
             }
 
             var ing_list = (from ing_info in mying_all_list.ToList()
@@ -82,7 +93,7 @@ namespace OnePizza0
                                 n_hated = mying_all_list.Where(p => p.ing_name == ing_info.ing_name && p.is_loved == false).Count(),
 
                             }).Distinct().ToList();
-                            
+
             foreach (var item in ing_list)
             {
                 if (myingredient_info_list.Where(p => p.ingredient_name == item.ing_name).Count() == 0)
@@ -101,7 +112,7 @@ namespace OnePizza0
 
             File.WriteAllText(full_path + "_output.txt", createText);
         }
-       
+
     }
     //Input File classes
     class picky_client
