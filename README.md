@@ -4,7 +4,7 @@ My solution to the 2022 Hash Code Google coding competition practice round probl
 
 ---
 
-The score of this solution add up to (2,722)
+## The score of this solution add up to (3,146)
 
 A - An example => 2 points
 
@@ -14,7 +14,7 @@ C - Coarse => 3 points
 
 D - Difficult => 1,708 points
 
-E - Elaborate => 1004 points
+E - Elaborate => 1,428 points
 
 ---
 
